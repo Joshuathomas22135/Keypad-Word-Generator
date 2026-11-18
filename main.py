@@ -4,19 +4,24 @@ choices are added."""
 
 # Tower of Hanoi
 print("Tower Of Hanoi")
+
 def towerOfHanoi(disks, source, aux, destination):
     if disks == 1:
         print(f"Move disk 1 from {source} to {destination}")
         return
 
-    towerOfHanoi(disks - 1, source, aux, destination)
+    towerOfHanoi(disks - 1, source, destination, aux)
+
     print(f"Move disk {disks} from {source} to {destination}")
 
     towerOfHanoi(disks - 1, aux, source, destination)
 
+
 towerOfHanoi(3, "A", "B", "C")
 print()
 
+
+# Phone Keypad
 print("Phone Keypad")
 
 keys = {
@@ -27,7 +32,7 @@ keys = {
     "6": ["m", "n", "o"],
     "7": ["p", "q", "r", "s"],
     "8": ["t", "u", "v"],
-    "9":["w","x","y","z"]
+    "9": ["w", "x", "y", "z"]
 }
 
 def generateWords(digits, currentWord):
@@ -39,4 +44,37 @@ def generateWords(digits, currentWord):
     remainingDigits = digits[1:]
 
     for letter in keys[firstDigit]:
-    generateWords(remainingDigits, currentWord + letter)
+        generateWords(remainingDigits, currentWord + letter)
+
+
+num = "23"
+
+print(f"Digits: {num}")
+print("Possible Words:")
+
+generateWords(num, "")
+print()
+
+
+# Recursion Tree
+print("Recursion Tree")
+
+def recursionTree(digits, currentWord, level):
+    indent = " " * level
+
+    if len(digits) == 0:
+        print(f"{indent}Word Completed: {currentWord}")
+        return
+
+    firstDigit = digits[0]
+    remainingDigits = digits[1:]
+
+    print(f"{indent}Current Word: {currentWord}")
+    print(f"{indent}Next Digit: {firstDigit}")
+
+    for letter in keys[firstDigit]:
+        print(f"{indent}Choosing: {letter}")
+        recursionTree(remainingDigits, currentWord + letter, level + 1)
+
+
+recursionTree("45", "", 0)
